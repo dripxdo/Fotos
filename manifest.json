@@ -1,43 +1,636 @@
-{
-    "name": "TikTok",
-    "short_name": "TikTok",
-    "description": "Seu painel de configurações personalizado.",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#0a0a0e",
-    "theme_color": "#0a0a0e",
-    "icons": [
-        {
-            "src": "/icons/100.png",
-            "sizes": "100x100",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/1024.png",
-            "sizes": "1024x1024",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/114.png",
-            "sizes": "114x114",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/120.png",
-            "sizes": "120x120",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/128.png",
-            "sizes": "128x128",
-            "type": "image/png"
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Kitty 1.0</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HK 1.0">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+    <meta name="theme-color" content="#0a0a0e">
+
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            overflow: hidden;
         }
-        // Se você tiver outros ícones na pasta 'icons/' com outros nomes,
-        // adicione-os aqui seguindo o mesmo padrão:
-        // {
-        //     "src": "/icons/nome-do-seu-icone.png",
-        //     "sizes": "larguraxaltura", // SUBSTITUA pela largura e altura REAIS do seu arquivo PNG
-        //     "type": "image/png"
-        // }
-    ]
-}
+
+       .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+       .loading-us {
+            font-size: 150px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ff2a88;
+            text-shadow:
+                0 0 2px rgba(255, 42, 136, 0.9),
+                0 0 8px rgba(255, 42, 136, 0.5),
+                0 0 16px rgba(255, 42, 136, 0.25);
+            filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.35));
+            margin-bottom: 18px;
+        }
+
+       .loading-bar-container {
+            width: 300px;
+            height: 15px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 12px;
+            border: 1px solid #ff0f7b;
+            box-shadow: 0 0 10px rgba(255, 15, 123, 0.35);
+        }
+
+       .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff0f7b, #00ff6a);
+            transition: width 0.4s ease-out;
+        }
+
+       .loading-text {
+            font-size: 11px;
+            color: #b6b6c5;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            text-align: center;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+       .menu {
+            width: 360px;
+            background: #0a0a0e;
+            border-radius: 22px;
+            border: 2px solid #ff0f7b;
+            box-shadow: 0 0 25px #ff0f7b;
+            overflow: hidden;
+            display: none;
+        }
+
+       .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px;
+            color: #ff0f7b;
+            font-weight: bold;
+            border-bottom: 1px solid #ff0f7b;
+            text-shadow: 0 0 6px #ff0f7b, 0 0 12px #ff0f7b, 0 0 20px #ff0f7b;
+        }
+
+       .timer {
+            font-size: 12px;
+            color: #ff6aa9
+        }
+
+       .main {
+            display: flex
+        }
+
+       .sidebar {
+            width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            border-right: 1px solid #1a1a22;
+        }
+
+       .sideBtn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #111116;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+        }
+
+       .sideBtn.active {
+            background: linear-gradient(180deg, #ff0f7b, #ff3d9a);
+            box-shadow: 0 0 15px #ff0f7b;
+        }
+
+       .content {
+            flex: 1;
+            padding: 14px;
+            color: white;
+        }
+
+       .bigButton {
+            margin-top: 10px;
+            padding: 16px;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #ff0f7b, #ff3d9a);
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 0 12px #ff0f7b;
+            cursor: pointer;
+            color: white;
+        }
+
+       .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ff0f7b;
+        }
+
+       .console {
+            margin-top: 10px;
+            background: #000;
+            color: #00ff6a;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 10px;
+            border-radius: 10px;
+            height: 120px;
+            overflow: auto;
+            border: 1px solid #222;
+        }
+
+       .progress {
+            width: 100%;
+            height: 6px;
+            background: #111;
+            border-radius: 10px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+
+       .bar {
+            height: 100%;
+            width: 0%;
+            background: #ff0f7b;
+            transition: width.4s;
+        }
+
+       .optionBox {
+            margin-top: 12px;
+            padding: 14px;
+            border-radius: 14px;
+            background: #0e0e14;
+            border: 1px solid #2a2a35;
+            box-shadow: 0 0 8px rgba(255, 15, 123,.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+       .optionText {
+            display: flex;
+            flex-direction: column
+        }
+
+       .optionTitle {
+            font-weight: bold
+        }
+
+       .optionDesc {
+            font-size: 12px;
+            color: #aaa
+        }
+
+       .content #aim.optionBox:nth-child(2) {
+            border-color: #8A2BE2;
+            box-shadow: 0 0 10px rgba(138, 43, 226,.35), 0 0 25px rgba(138, 43, 226,.15);
+        }
+
+       .content #aim.optionBox:nth-child(3) {
+            border-color: #FF8C00;
+            box-shadow: 0 0 10px rgba(255, 140, 0,.35), 0 0 25px rgba(255, 140, 0,.15);
+        }
+
+       .content #aim.optionBox:nth-child(4) {
+            border-color: #8A2BE2;
+            box-shadow: 0 0 10px rgba(138, 43, 226,.35), 0 0 25px rgba(138, 43, 226,.15);
+        }
+
+       .content #aim.optionBox:nth-child(2).optionTitle {
+            color: #8A2BE2;
+        }
+
+       .content #aim.optionBox:nth-child(3).optionTitle {
+            color: #FF8C00;
+        }
+
+       .content #aim.optionBox:nth-child(4).optionTitle {
+            color: #8A2BE2;
+        }
+
+       .switch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+       .switch.on {
+            background: currentColor;
+            box-shadow: 0 0 10px currentColor, 0 0 25px currentColor;
+        }
+
+       .content #aim.optionBox:nth-child(2).switch.on {
+            color: #8A2BE2;
+        }
+
+       .content #aim.optionBox:nth-child(3).switch.on {
+            color: #FF8C00;
+        }
+
+       .content #aim.optionBox:nth-child(4).switch.on {
+            color: #8A2BE2;
+        }
+
+       .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 20px;
+            background: #1b1b24;
+            margin-top: 10px;
+            outline: none;
+        }
+
+       .slider::-webkit-slider-runnable-track {
+            height: 6px;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #ff0f7b, #ff3d9a);
+        }
+
+       .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ff0f7b;
+            margin-top: -6px;
+            box-shadow: 0 0 10px #ff0f7b, 0 0 25px #ff0f7b;
+            cursor: pointer;
+        }
+
+       .targetRow {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+       .target {
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: #111116;
+            border: 1px solid #333;
+            cursor: pointer;
+            color: white;
+        }
+
+       .target.active {
+            background: #ff0f7b
+        }
+
+       .greenDot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00ff6a;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-us">US</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="initialLoadingBar"></div>
+        </div>
+        <div class="loading-text">
+            acesso verificado<br>
+            conectado ao USB
+        </div>
+    </div>
+
+    <div class="menu" id="menu">
+        <div class="header">
+            لوحة هيلو كيتي 1.0
+            <span class="timer" id="timer"></span>
+        </div>
+        <div class="main">
+            <div class="sidebar">
+                <div class="sideBtn active" onclick="openPage('inj',this)">✱</div>
+                <div class="sideBtn" onclick="openPage('aim',this)">◎</div>
+                <div class="sideBtn" onclick="openPage('sensi',this)">☰</div>
+                <div class="sideBtn" onclick="openPage('extra',this)">⚙</div>
+            </div>
+
+            <div class="content">
+
+                <div id="inj">
+                    <div class="bigButton" onclick="inject()">✱ INJETAR NO FF</div>
+                    <div class="bigButton" onclick="inject()">✱ INJETAR NO FF MAX</div>
+
+                    <div class="status" id="status">
+                        ○ Aguardando injeção...
+                    </div>
+
+                    <div class="progress">
+                        <div class="bar" id="bar"></div>
+                    </div>
+
+                    <div class="console" id="console"></div>
+                </div>
+
+                <div id="aim" style="display:none">
+                    <h3>Configuração de Mira</h3>
+
+                    <div class="optionBox">
+                        <div class="optionText">
+                            <div class="optionTitle">Remover tremedeira</div>
+                            <div class="optionDesc">Estabiliza a mira</div>
+                        </div>
+                        <div class="switch" onclick="toggle(this)"></div>
+                    </div>
+
+                    <div class="optionBox">
+                        <div class="optionText">
+                            <div class="optionTitle">Aimbot</div>
+                            <div class="optionDesc">Melhora precisão</div>
+                        </div>
+                        <div class="switch" onclick="toggle(this)"></div>
+                    </div>
+
+                    <div class="optionBox">
+                        <div class="optionText">
+                            <div class="optionTitle">AimFOV</div>
+                            <div class="optionDesc">Aumenta alcance</div>
+                        </div>
+                        <div class="switch" onclick="toggle(this)"></div>
+                    </div>
+
+                    <div style="margin-top:10px">
+                        FOV: <span id="fovVal">150</span>
+                    </div>
+
+                    <input type="range" min="0" max="300" value="150" class="slider" oninput="fovVal.innerText=this.value">
+
+                    <div class="optionBox">
+                        <div class="optionText">
+                            <div class="optionTitle">AimLock</div>
+                            <div class="optionDesc">Trava no alvo</div>
+                        </div>
+                        <div class="switch" onclick="toggleAimLock(this)"></div>
+                    </div>
+
+                    <div id="aimlockOptions" style="display:none;margin-top:10px">
+                        <div class="targetRow">
+                            <div class="target active" onclick="selectTarget(this)">Cabeça</div>
+                            <div class="target" onclick="selectTarget(this)">Pescoço</div>
+                            <div class="target" onclick="selectTarget(this)">Peito</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sensi" style="display:none">
+                    <h3>Gerador de sensi</h3>
+                    <input id="phone" placeholder="Modelo do celular" style="width:100%;padding:10px;border-radius:10px;background:#111116;border:1px solid #333;color:white; box-sizing: border-box;">
+                    <div style="margin-top:10px">Tipo</div>
+                    <div class="targetRow">
+                        <div class="target active" onclick="selectType(this)">Normal</div>
+                        <div class="target" onclick="selectType(this)">Pro</div>
+                        <div class="target" onclick="selectType(this)">Pro Max</div>
+                    </div>
+                    <div class="bigButton" onclick="generate()">GERAR SENSI</div>
+                    <div class="bigButton" onclick="autoDetect()">IDENTIFICAR CELULAR</div>
+                    <div id="result" style="margin-top:10px"></div>
+                    <div class="bigButton" onclick="importSensi()">IMPORTAR SENSI</div>
+                    <div class="status" id="importStatus"> ○ Aguardando importação... </div>
+                </div>
+
+                <div id="extra" style="display:none">
+                    <h3>Extras</h3>
+                    <div class="optionBox">
+                        <div class="optionTitle">Forçar 120fps</div>
+                        <div class="switch" onclick="toggle(this)"></div>
+                    </div>
+                    <div class="optionBox">
+                        <div class="optionTitle">Travar retrato</div>
+                        <div class="switch" onclick="toggle(this)"></div>
+                    </div>
+                    <div class="optionBox">
+                        <div class="optionTitle">Troca de Arma Rápida</div>
+                        <div class="switch" onclick="toggle(this)"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startTimer() {
+            let end = Date.now() + 30 * 24 * 60 * 60 * 1000
+            setInterval(() => {
+                let diff = end - Date.now()
+                let d = Math.floor(diff / 86400000)
+                let h = Math.floor(diff % 86400000 / 3600000)
+                let m = Math.floor(diff % 3600000 / 60000)
+                let s = Math.floor(diff % 60000 / 1000)
+                if (d < 0) {
+                    timer.innerText = "Expirado!";
+                    return;
+                }
+                timer.innerText = d + "d " + h + "h " + m + "m " + s + "s"
+            }, 1000)
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const initialLoadingBar = document.getElementById('initialLoadingBar');
+            const menu = document.getElementById('menu');
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 5;
+                if (progress > 100) progress = 100;
+                initialLoadingBar.style.width = progress + '%';
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        menu.style.display = 'block';
+                        startTimer();
+                    }, 400);
+                }
+            }, 150);
+
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                      .then(registration => {
+                            console.log('Service Worker registrado com sucesso:', registration);
+                        })
+                      .catch(error => {
+                            console.error('Falha ao registrar o Service Worker:', error);
+                        });
+                });
+            }
+        });
+
+        function toggle(el) {
+            el.classList.toggle("on")
+            if (el.classList.contains("on")) {
+                el.innerHTML = "✓"
+            } else {
+                el.innerHTML = ""
+            }
+        }
+
+        function toggleAimLock(el) {
+            toggle(el)
+            let box = document.getElementById("aimlockOptions")
+            if (el.classList.contains("on")) {
+                box.style.display = "block"
+            } else {
+                box.style.display = "none"
+            }
+        }
+
+        function selectTarget(el) {
+            document.querySelectorAll("#aim.target").forEach(t => {
+                t.classList.remove("active")
+            })
+            el.classList.add("active")
+        }
+
+        function selectType(el) {
+            document.querySelectorAll("#sensi.target").forEach(t => {
+                t.classList.remove("active")
+            })
+            el.classList.add("active")
+        }
+
+        function openPage(page, btn) {
+            document.querySelectorAll(".sideBtn").forEach(b => b.classList.remove("active"))
+            btn.classList.add("active")
+
+            document.getElementById("inj").style.display = "none"
+            document.getElementById("aim").style.display = "none"
+            document.getElementById("sensi").style.display = "none"
+            document.getElementById("extra").style.display = "none"
+
+            document.getElementById(page).style.display = "block"
+        }
+
+        function inject() {
+            let consoleBox = document.getElementById("console")
+            let bar = document.getElementById("bar")
+            let status = document.getElementById("status")
+
+            consoleBox.innerHTML = ""
+            bar.style.width = "0%"
+            status.innerHTML = "○ Iniciando..."
+
+            let steps = [
+                "Inicializando bypass...",
+                "Conectando memória...",
+                "Carregando módulos...",
+                "Injetando payload...",
+                "Finalizando..."
+            ]
+
+            let i = 0
+
+            function next() {
+                if (i >= steps.length) {
+                    status.innerHTML = "<span class='greenDot'></span>Injeção concluída"
+                    bar.style.width = "100%"
+                    return
+                }
+                consoleBox.innerHTML += steps[i] + "<br>"
+                bar.style.width = (i + 1) * 20 + "%"
+                i++
+                setTimeout(next, 900)
+            }
+            next()
+        }
+
+        function rand() {
+            return Math.floor(Math.random() * 71) + 130
+        }
+
+        function generate() {
+            let phone = document.getElementById("phone").value.toLowerCase().trim()
+            let result = document.getElementById("result")
+
+            let valid = false
+            for (let i = 7; i <= 17; i++) {
+                if (phone.includes("iphone " + i)) {
+                    valid = true;
+                    break
+                }
+            }
+            if (!valid) {
+                result.innerHTML = "<span style='color:red'>Dispositivo inválido</span>"
+                return
+            }
+            result.innerHTML =
+                "Geral: " + rand() + "<br>" +
+                "Red Dot: " + rand() + "<br>" +
+                "2x Scope: " + rand() + "<br>" +
+                "4x Scope: " + rand() + "<br>" +
+                "AWM Scope: " + rand() + "<br>" +
+                "Olhadinha: " + rand()
+        }
+
+        function autoDetect() {
+            let detected = "iPhone 13"
+            document.getElementById("phone").value = detected
+            generate()
+        }
+
+        function importSensi() {
+            let s = document.getElementById("importStatus")
+            s.innerHTML = "○ Importando..."
+            setTimeout(() => {
+                s.innerHTML = "<span class='greenDot'></span>Importado com sucesso"
+            }, 2000)
+        }
+    </script>
+
+</body>
+</html>
