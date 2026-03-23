@@ -3,35 +3,34 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Kitty 1.0</title> <!-- Título do seu PWA -->
-    <link rel="manifest" href="/manifest.json"> <!-- Link para o manifest -->
-    <meta name="apple-mobile-web-app-capable" content="yes"> <!-- Para iOS ser capaz de adicionar à home screen -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> <!-- Estilo da barra de status no iOS -->
-    <meta name="apple-mobile-web-app-title" content="HK 1.0"> <!-- Nome do app na tela inicial iOS -->
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png"> <!-- Ícone para iOS -->
-    <meta name="theme-color" content="#0a0a0e"> <!-- Cor tema para a barra do navegador -->
+    <title>Hello Kitty 1.0</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HK 1.0">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+    <meta name="theme-color" content="#0a0a0e">
 
     <style>
         body {
             margin: 0;
-            background: #000; /* fundo preto */
+            background: #000;
             font-family: Arial;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: white;
-            overflow: hidden; /* Adicionei isso para evitar scroll desnecessário */
+            overflow: hidden;
         }
 
-        /* LOADING ANIMATION STYLES */
        .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000; /* fundo preto */
+            background: #000;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -41,7 +40,6 @@
             font-family: 'Arial', sans-serif;
         }
 
-        /* US mais “real”, com menos brilho */
        .loading-us {
             font-size: 150px;
             font-weight: 800;
@@ -83,52 +81,6 @@
             opacity: 0.9;
         }
 
-        /* LOGIN */
-       .login {
-            width: 340px;
-            background: #0a0a0e;
-            border-radius: 20px;
-            border: 2px solid #ff0f7b;
-            box-shadow: 0 0 25px #ff0f7b;
-            padding: 25px;
-            text-align: center;
-            display: none;
-        }
-
-       .login h2 {
-            color: #ff0f7b;
-            text-shadow: 0 0 6px #ff0f7b, 0 0 12px #ff0f7b, 0 0 20px #ff0f7b, 0 0 40px #ff0f7b;
-            letter-spacing: 1px;
-        }
-
-       .input {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: #111116;
-            color: white;
-            box-sizing: border-box; /* Adicionado para padding não estourar a largura */
-        }
-
-       .loginBtn {
-            margin-top: 15px;
-            padding: 14px;
-            border-radius: 12px;
-            background: linear-gradient(90deg, #ff0f7b, #ff3d9a);
-            cursor: pointer;
-            font-weight: bold;
-            color: white; /* Adicionado cor para o texto do botão */
-        }
-
-       .anim {
-            margin-top: 15px;
-            color: #ff0f7b;
-            display: none;
-        }
-
-        /* MENU */
        .menu {
             width: 360px;
             background: #0a0a0e;
@@ -177,7 +129,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: white; /* Adicionado cor para os ícones */
+            color: white;
         }
 
        .sideBtn.active {
@@ -188,10 +140,9 @@
        .content {
             flex: 1;
             padding: 14px;
-            color: white; /* Adicionado cor para o texto do conteúdo */
+            color: white;
         }
 
-        /* BOTÃO */
        .bigButton {
             margin-top: 10px;
             padding: 16px;
@@ -201,10 +152,9 @@
             font-weight: bold;
             box-shadow: 0 0 12px #ff0f7b;
             cursor: pointer;
-            color: white; /* Adicionado cor para o texto do botão */
+            color: white;
         }
 
-        /* STATUS */
        .status {
             margin-top: 10px;
             padding: 10px;
@@ -212,21 +162,19 @@
             border: 1px solid #ff0f7b;
         }
 
-        /* CONSOLE */
        .console {
             margin-top: 10px;
             background: #000;
-            color: #00ff6a; /* Mudei para um verde mais vibrante para console */
+            color: #00ff6a;
             font-family: monospace;
             font-size: 12px;
             padding: 10px;
             border-radius: 10px;
             height: 120px;
             overflow: auto;
-            border: 1px solid #222; /* Adicionei uma borda leve */
+            border: 1px solid #222;
         }
 
-        /* PROGRESS */
        .progress {
             width: 100%;
             height: 6px;
@@ -243,7 +191,6 @@
             transition: width.4s;
         }
 
-        /* OPTION BOX */
        .optionBox {
             margin-top: 12px;
             padding: 14px;
@@ -254,7 +201,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white; /* Cor padrão para o texto */
+            color: white;
         }
 
        .optionText {
@@ -271,23 +218,20 @@
             color: #aaa
         }
 
-        /* >>> Alternância roxo/laranja nas optionBox */
-        /* Ajustei a seleção para evitar sobreposição */
-       .content #aim.optionBox:nth-child(2) { /* Primeiro optionBox dentro de #aim */
+       .content #aim.optionBox:nth-child(2) {
             border-color: #8A2BE2;
             box-shadow: 0 0 10px rgba(138, 43, 226,.35), 0 0 25px rgba(138, 43, 226,.15);
         }
 
-       .content #aim.optionBox:nth-child(3) { /* Segundo optionBox dentro de #aim */
+       .content #aim.optionBox:nth-child(3) {
             border-color: #FF8C00;
             box-shadow: 0 0 10px rgba(255, 140, 0,.35), 0 0 25px rgba(255, 140, 0,.15);
         }
 
-       .content #aim.optionBox:nth-child(4) { /* Terceiro optionBox dentro de #aim */
+       .content #aim.optionBox:nth-child(4) {
             border-color: #8A2BE2;
             box-shadow: 0 0 10px rgba(138, 43, 226,.35), 0 0 25px rgba(138, 43, 226,.15);
         }
-        /* E assim por diante para cada um que você quiser alternar */
 
        .content #aim.optionBox:nth-child(2).optionTitle {
             color: #8A2BE2;
@@ -301,7 +245,6 @@
             color: #8A2BE2;
         }
 
-        /* SWITCH */
        .switch {
             width: 36px;
             height: 36px;
@@ -319,7 +262,6 @@
             box-shadow: 0 0 10px currentColor, 0 0 25px currentColor;
         }
 
-        /* Ajustei a seleção para evitar sobreposição */
        .content #aim.optionBox:nth-child(2).switch.on {
             color: #8A2BE2;
         }
@@ -332,7 +274,6 @@
             color: #8A2BE2;
         }
 
-        /* SLIDER AIMFOV ESTILO NEON */
        .slider {
             -webkit-appearance: none;
             width: 100%;
@@ -360,12 +301,11 @@
             cursor: pointer;
         }
 
-        /* TARGET */
        .targetRow {
             display: flex;
             gap: 8px;
             margin-top: 10px;
-            flex-wrap: wrap; /* Adicionei para quebrar linha se não couber */
+            flex-wrap: wrap;
         }
 
        .target {
@@ -374,14 +314,13 @@
             background: #111116;
             border: 1px solid #333;
             cursor: pointer;
-            color: white; /* Adicionado cor para o texto */
+            color: white;
         }
 
        .target.active {
             background: #ff0f7b
         }
 
-        /* DOT */
        .greenDot {
             display: inline-block;
             width: 10px;
@@ -394,7 +333,6 @@
 </head>
 <body>
 
-    <!-- Loading Animation -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-us">US</div>
         <div class="loading-bar-container">
@@ -404,14 +342,6 @@
             acesso verificado<br>
             conectado ao USB
         </div>
-    </div>
-
-    <div class="login" id="loginBox">
-        <h2>لوحة هيلو كيتي 1.0</h2>
-        <input id="user" class="input" placeholder="Login">
-        <input id="pass" class="input" type="password" placeholder="Senha">
-        <div class="loginBtn" onclick="login()">LOGIN</div>
-        <div class="anim" id="anim">Autenticando...</div>
     </div>
 
     <div class="menu" id="menu">
@@ -429,7 +359,6 @@
 
             <div class="content">
 
-                <!-- INJETAR -->
                 <div id="inj">
                     <div class="bigButton" onclick="inject()">✱ INJETAR NO FF</div>
                     <div class="bigButton" onclick="inject()">✱ INJETAR NO FF MAX</div>
@@ -445,7 +374,6 @@
                     <div class="console" id="console"></div>
                 </div>
 
-                <!-- AIM -->
                 <div id="aim" style="display:none">
                     <h3>Configuração de Mira</h3>
 
@@ -496,7 +424,6 @@
                     </div>
                 </div>
 
-                <!-- SENSI -->
                 <div id="sensi" style="display:none">
                     <h3>Gerador de sensi</h3>
                     <input id="phone" placeholder="Modelo do celular" style="width:100%;padding:10px;border-radius:10px;background:#111116;border:1px solid #333;color:white; box-sizing: border-box;">
@@ -513,7 +440,6 @@
                     <div class="status" id="importStatus"> ○ Aguardando importação... </div>
                 </div>
 
-                <!-- EXTRA -->
                 <div id="extra" style="display:none">
                     <h3>Extras</h3>
                     <div class="optionBox">
@@ -535,9 +461,7 @@
     </div>
 
     <script>
-        /* TIMER */
         function startTimer() {
-            // Mudei para 30 dias a partir da data atual para fins de demonstração
             let end = Date.now() + 30 * 24 * 60 * 60 * 1000
             setInterval(() => {
                 let diff = end - Date.now()
@@ -545,7 +469,7 @@
                 let h = Math.floor(diff % 86400000 / 3600000)
                 let m = Math.floor(diff % 3600000 / 60000)
                 let s = Math.floor(diff % 60000 / 1000)
-                if (d < 0) { // Se a data final já passou
+                if (d < 0) {
                     timer.innerText = "Expirado!";
                     return;
                 }
@@ -553,11 +477,9 @@
             }, 1000)
         }
 
-        // Controla a animação de carregamento e mostra o menu ou login
         document.addEventListener('DOMContentLoaded', (event) => {
             const loadingScreen = document.getElementById('loadingScreen');
             const initialLoadingBar = document.getElementById('initialLoadingBar');
-            const loginBox = document.getElementById('loginBox'); // Pega a caixa de login
             const menu = document.getElementById('menu');
 
             let progress = 0;
@@ -570,59 +492,25 @@
                     clearInterval(interval);
                     setTimeout(() => {
                         loadingScreen.style.display = 'none';
-                        loginBox.style.display = 'block'; // Mostra a tela de login após o carregamento
-                        // startTimer(); // Só iniciar o timer após o login bem-sucedido
+                        menu.style.display = 'block';
+                        startTimer();
                     }, 400);
                 }
             }, 150);
 
-            // Registrar o service worker
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('/service-worker.js')
-                       .then(registration => {
+                      .then(registration => {
                             console.log('Service Worker registrado com sucesso:', registration);
                         })
-                       .catch(error => {
+                      .catch(error => {
                             console.error('Falha ao registrar o Service Worker:', error);
                         });
                 });
             }
         });
 
-        // Função de Login (ADICIONADA)
-        function login() {
-            const user = document.getElementById('user').value;
-            const pass = document.getElementById('pass').value;
-            const anim = document.getElementById('anim');
-            const loginBox = document.getElementById('loginBox');
-            const menu = document.getElementById('menu');
-
-            anim.style.display = 'block'; // Mostra "Autenticando..."
-
-            // Simulação de autenticação
-            setTimeout(() => {
-                if (user === 'test' && pass === '123') { // Credenciais de teste
-                    anim.innerText = 'Login bem-sucedido!';
-                    anim.style.color = '#00ff6a'; // Cor verde para sucesso
-                    setTimeout(() => {
-                        loginBox.style.display = 'none';
-                        menu.style.display = 'block'; // Mostra o menu
-                        startTimer(); // Inicia o timer
-                    }, 1000);
-                } else {
-                    anim.innerText = 'Login falhou. Tente novamente.';
-                    anim.style.color = 'red'; // Cor vermelha para falha
-                    setTimeout(() => {
-                        anim.style.display = 'none';
-                        anim.style.color = '#ff0f7b'; // Volta à cor original
-                        anim.innerText = 'Autenticando...'; // Volta ao texto original
-                    }, 2000);
-                }
-            }, 2000); // Simula 2 segundos de autenticação
-        }
-
-        /* TOGGLE */
         function toggle(el) {
             el.classList.toggle("on")
             if (el.classList.contains("on")) {
@@ -632,7 +520,6 @@
             }
         }
 
-        /* AIMLOCK */
         function toggleAimLock(el) {
             toggle(el)
             let box = document.getElementById("aimlockOptions")
@@ -643,17 +530,15 @@
             }
         }
 
-        // Função corrigida para `selectTarget`
         function selectTarget(el) {
-            document.querySelectorAll("#aim.targetRow.target").forEach(t => { // Seleciona apenas os alvos dentro de #aim
+            document.querySelectorAll("#aim.target").forEach(t => {
                 t.classList.remove("active")
             })
             el.classList.add("active")
         }
 
-        // Função corrigida para `selectType`
         function selectType(el) {
-            document.querySelectorAll("#sensi.targetRow.target").forEach(t => { // Seleciona apenas os tipos dentro de #sensi
+            document.querySelectorAll("#sensi.target").forEach(t => {
                 t.classList.remove("active")
             })
             el.classList.add("active")
@@ -733,7 +618,7 @@
         }
 
         function autoDetect() {
-            let detected = "iPhone 13" // Você pode tentar usar navigator.userAgent para detectar, mas nem sempre é preciso ou desejável
+            let detected = "iPhone 13"
             document.getElementById("phone").value = detected
             generate()
         }
