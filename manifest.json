@@ -1,0 +1,43 @@
+{
+    "name": "TikTok",
+    "short_name": "TikTok",
+    "description": "Seu painel de configurações personalizado.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0a0a0e",
+    "theme_color": "#0a0a0e",
+    "icons": [
+        {
+            "src": "/icons/100.png",
+            "sizes": "100x100",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/1024.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/114.png",
+            "sizes": "114x114",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/120.png",
+            "sizes": "120x120",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+        // Se você tiver outros ícones na pasta 'icons/' com outros nomes,
+        // adicione-os aqui seguindo o mesmo padrão:
+        // {
+        //     "src": "/icons/nome-do-seu-icone.png",
+        //     "sizes": "larguraxaltura", // SUBSTITUA pela largura e altura REAIS do seu arquivo PNG
+        //     "type": "image/png"
+        // }
+    ]
+}
