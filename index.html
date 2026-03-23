@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Kitty 1.0</title>
+
+    <!-- PWA / Ícones -->
     <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="HK 1.0">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
     <meta name="theme-color" content="#0a0a0e">
 
     <style>
@@ -24,7 +26,7 @@
             overflow: hidden;
         }
 
-       .loading-screen {
+      .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
@@ -40,7 +42,7 @@
             font-family: 'Arial', sans-serif;
         }
 
-       .loading-us {
+      .loading-us {
             font-size: 150px;
             font-weight: 800;
             letter-spacing: 2px;
@@ -53,7 +55,7 @@
             margin-bottom: 18px;
         }
 
-       .loading-bar-container {
+      .loading-bar-container {
             width: 300px;
             height: 15px;
             background-color: #333;
@@ -64,14 +66,14 @@
             box-shadow: 0 0 10px rgba(255, 15, 123, 0.35);
         }
 
-       .loading-bar {
+      .loading-bar {
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, #ff0f7b, #00ff6a);
             transition: width 0.4s ease-out;
         }
 
-       .loading-text {
+      .loading-text {
             font-size: 11px;
             color: #b6b6c5;
             margin-top: 8px;
@@ -81,7 +83,7 @@
             opacity: 0.9;
         }
 
-       .menu {
+      .menu {
             width: 360px;
             background: #0a0a0e;
             border-radius: 22px;
@@ -91,7 +93,7 @@
             display: none;
         }
 
-       .header {
+      .header {
             display: flex;
             justify-content: space-between;
             padding: 16px;
@@ -101,16 +103,16 @@
             text-shadow: 0 0 6px #ff0f7b, 0 0 12px #ff0f7b, 0 0 20px #ff0f7b;
         }
 
-       .timer {
+      .timer {
             font-size: 12px;
             color: #ff6aa9
         }
 
-       .main {
+      .main {
             display: flex
         }
 
-       .sidebar {
+      .sidebar {
             width: 60px;
             display: flex;
             flex-direction: column;
@@ -120,7 +122,7 @@
             border-right: 1px solid #1a1a22;
         }
 
-       .sideBtn {
+      .sideBtn {
             width: 42px;
             height: 42px;
             border-radius: 50%;
@@ -132,18 +134,18 @@
             color: white;
         }
 
-       .sideBtn.active {
+      .sideBtn.active {
             background: linear-gradient(180deg, #ff0f7b, #ff3d9a);
             box-shadow: 0 0 15px #ff0f7b;
         }
 
-       .content {
+      .content {
             flex: 1;
             padding: 14px;
             color: white;
         }
 
-       .bigButton {
+      .bigButton {
             margin-top: 10px;
             padding: 16px;
             border-radius: 14px;
@@ -155,14 +157,14 @@
             color: white;
         }
 
-       .status {
+      .status {
             margin-top: 10px;
             padding: 10px;
             border-radius: 10px;
             border: 1px solid #ff0f7b;
         }
 
-       .console {
+      .console {
             margin-top: 10px;
             background: #000;
             color: #00ff6a;
@@ -175,7 +177,7 @@
             border: 1px solid #222;
         }
 
-       .progress {
+      .progress {
             width: 100%;
             height: 6px;
             background: #111;
@@ -184,14 +186,14 @@
             overflow: hidden;
         }
 
-       .bar {
+      .bar {
             height: 100%;
             width: 0%;
             background: #ff0f7b;
-            transition: width.4s;
+            transition: width 0.4s;
         }
 
-       .optionBox {
+      .optionBox {
             margin-top: 12px;
             padding: 14px;
             border-radius: 14px;
@@ -204,48 +206,48 @@
             color: white;
         }
 
-       .optionText {
+      .optionText {
             display: flex;
             flex-direction: column
         }
 
-       .optionTitle {
+      .optionTitle {
             font-weight: bold
         }
 
-       .optionDesc {
+      .optionDesc {
             font-size: 12px;
             color: #aaa
         }
 
-       .content #aim.optionBox:nth-child(2) {
+      .content #aim.optionBox:nth-child(2) {
             border-color: #8A2BE2;
             box-shadow: 0 0 10px rgba(138, 43, 226,.35), 0 0 25px rgba(138, 43, 226,.15);
         }
 
-       .content #aim.optionBox:nth-child(3) {
+      .content #aim.optionBox:nth-child(3) {
             border-color: #FF8C00;
             box-shadow: 0 0 10px rgba(255, 140, 0,.35), 0 0 25px rgba(255, 140, 0,.15);
         }
 
-       .content #aim.optionBox:nth-child(4) {
+      .content #aim.optionBox:nth-child(4) {
             border-color: #8A2BE2;
             box-shadow: 0 0 10px rgba(138, 43, 226,.35), 0 0 25px rgba(138, 43, 226,.15);
         }
 
-       .content #aim.optionBox:nth-child(2).optionTitle {
+      .content #aim.optionBox:nth-child(2).optionTitle {
             color: #8A2BE2;
         }
 
-       .content #aim.optionBox:nth-child(3).optionTitle {
+      .content #aim.optionBox:nth-child(3).optionTitle {
             color: #FF8C00;
         }
 
-       .content #aim.optionBox:nth-child(4).optionTitle {
+      .content #aim.optionBox:nth-child(4).optionTitle {
             color: #8A2BE2;
         }
 
-       .switch {
+      .switch {
             width: 36px;
             height: 36px;
             border-radius: 50%;
@@ -257,24 +259,24 @@
             font-size: 18px;
         }
 
-       .switch.on {
+      .switch.on {
             background: currentColor;
             box-shadow: 0 0 10px currentColor, 0 0 25px currentColor;
         }
 
-       .content #aim.optionBox:nth-child(2).switch.on {
+      .content #aim.optionBox:nth-child(2).switch.on {
             color: #8A2BE2;
         }
 
-       .content #aim.optionBox:nth-child(3).switch.on {
+      .content #aim.optionBox:nth-child(3).switch.on {
             color: #FF8C00;
         }
 
-       .content #aim.optionBox:nth-child(4).switch.on {
+      .content #aim.optionBox:nth-child(4).switch.on {
             color: #8A2BE2;
         }
 
-       .slider {
+      .slider {
             -webkit-appearance: none;
             width: 100%;
             height: 6px;
@@ -284,13 +286,13 @@
             outline: none;
         }
 
-       .slider::-webkit-slider-runnable-track {
+      .slider::-webkit-slider-runnable-track {
             height: 6px;
             border-radius: 20px;
             background: linear-gradient(90deg, #ff0f7b, #ff3d9a);
         }
 
-       .slider::-webkit-slider-thumb {
+      .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             width: 18px;
             height: 18px;
@@ -301,14 +303,14 @@
             cursor: pointer;
         }
 
-       .targetRow {
+      .targetRow {
             display: flex;
             gap: 8px;
             margin-top: 10px;
             flex-wrap: wrap;
         }
 
-       .target {
+      .target {
             padding: 8px 12px;
             border-radius: 20px;
             background: #111116;
@@ -317,11 +319,11 @@
             color: white;
         }
 
-       .target.active {
+      .target.active {
             background: #ff0f7b
         }
 
-       .greenDot {
+      .greenDot {
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -501,10 +503,10 @@
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('/service-worker.js')
-                      .then(registration => {
+                     .then(registration => {
                             console.log('Service Worker registrado com sucesso:', registration);
                         })
-                      .catch(error => {
+                     .catch(error => {
                             console.error('Falha ao registrar o Service Worker:', error);
                         });
                 });
